@@ -1,95 +1,57 @@
+'use client';
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import Logo from "../../public/barbearia-logo.png"
+import Lua from "../../public/moon.png"
+import Sol from "../../public/sun.png"
+import { useState } from 'react';
+import { Great_Vibes } from '@next/font/google'
+
+const GreatVibes= Great_Vibes({
+  weight:'400',
+  subsets:['latin']
+  })
 
 export default function Home() {
+
+  const [ ehTemaEscuro, setEhTemaEscuro ] = useState(false);
+
+  const alterarTema = () => {
+    setEhTemaEscuro(!ehTemaEscuro);
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    
+    <div className={ehTemaEscuro ? 'modo-escuro' : 'modo-claro'}>
+
+      <header>
+        <div className="limitar-secao">
+          <Image className="logomarca" src={Logo} alt="logomarca"/>
+          <button onClick={alterarTema} className={ehTemaEscuro ? 'modo-escuro' : 'modo-claro'}>
+          <Image src={ehTemaEscuro ? Lua : Sol} alt="Tema noturno / diurno" className="btn-icone"/>
+            {ehTemaEscuro ? `Light` : `Dark`}
+          </button>
         </div>
-      </div>
+      </header>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <section className="secao-banner"></section>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+      <section className="secao-texto limitar-secao">
+        <div className="limitar-secao">
+          <h1>Bem-vindo a Barber Shop</h1>
+          <p className="primeiro-paragrafo">
+            Nossa barbearia sempre oferece profissionais de qualidade e
+            estamos prontos para lidar com suas maiores expectativas.
           </p>
-        </a>
-      </div>
-    </main>
+          <p className="segundo-paragrafo">
+            Nossos serviços são dedicados ao seu sucesso pessoal. Aqui temos
+            uma equipe premiada que demonstrou o talento de mestres barbeiros
+            em vários concursos de estilo. Deixe nosso barbeiro ser seu
+            estilista pessoal e você nunca ficará desapontado.
+          </p>
+          <p className={GreatVibes.className} id="assinatura">S. Kelly</p>
+        </div>
+      </section>
+    </div>
   );
 }
